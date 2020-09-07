@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VUEjs機能</title>
+
+    <!-- cssの代わり -->
+    <style>
+        .benki{
+            color: burlywood
+        }
+    </style>
+
+</head>
+<body>
+    <div id="app">
+        <!-- vueからDOM操作：内容・要素の置き換え -->
+        {{ message }}
+        <!-- vueからDOM操作：プロパティ（src,class・・・）の置き換え -->
+        <div v-bind:class="toilet">トイレの便器はここです。</div>
+        <!-- ディレクティブ -->
+            <!-- if文 -->
+            <p v-if="miss">漏れてます</p>
+            <p v-if="unmiss">間に合いました</p>
+            
+            <!-- イベント -->
+            <p>{{ time }}</p>
+            <button v-on:click="now">現時刻</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                message: "unko",
+                toilet: "benki",
+                miss: true,
+                unmiss: false,
+                time: "00:00:00",     
+            },
+            methods: {
+                now: function(e){
+                    this.time = "11:22:33";
+                }
+            }    
+        });
+    </script>
+</body>
+</html>

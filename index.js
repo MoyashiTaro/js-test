@@ -15,7 +15,6 @@ async function getUsers(){
     return users;
 };
 
-
 async function listUsers(){
     const users = await getUsers();
     users.forEach(addList);
