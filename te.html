@@ -6,10 +6,9 @@
     <title>VUEjs機能</title>
 
     <!-- cssの代わり -->
-    <style>
-        .benki{
-            color: burlywood
-        }
+    <style type="text/css">
+        .benki{ color: burlywood; }
+        .flip-list-move{ transition: transform 1s; }
     </style>
 
 </head>
@@ -27,25 +26,50 @@
             <!-- イベント -->
             <p>{{ time }}</p>
             <button v-on:click="now">現時刻</button>
+
+            <!-- 繰り返し処理　＋　アニメーション -->
+            <transition-group name="flip-list" tag="ul">
+                <li v-for="shape in shapes" v-bind:key="shape.name">
+                    {{ shape.name }}
+                </li>
+            </transition-group>
+            <button v-on:click="shanbulls">シャッフル</button>       
     </div>
 
+    <!-- VUE -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- Lodash -->
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+
     <script>
-        const app = new Vue({
+        const app = new Vue({ // const app = は省略可能
             el: "#app",
             data: {
                 message: "unko",
                 toilet: "benki",
                 miss: true,
                 unmiss: false,
-                time: "00:00:00",     
+                time: "00:00:00",
+                shapes: [
+                    {name: "便秘"},
+                    {name: "下痢"},
+                    {name: "快便"},
+                    {name: "水"},
+                    {name: "マキグソ"},
+                    {name: "固め"},
+                ],   
             },
             methods: {
                 now: function(e){
-                    this.time = "11:22:33";
-                }
-            }    
-        });
+                    const date = new Date();
+                    this.time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+                },
+                shanbulls: function(){
+                    this.shapes = _.shuffle(this.shapes);
+                },
+            }
+        })
     </script>
 </body>
 </html>
