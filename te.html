@@ -9,13 +9,15 @@
     <style type="text/css">
         .benki{ color: burlywood; }
         .flip-list-move{ transition: transform 1s; }
+        .uko { color: cornflowerblue; }
     </style>
 
 </head>
 <body>
     <div id="app">
         <!-- vueからDOM操作：内容・要素の置き換え -->
-        {{ message }}
+        {{ message }}<br>
+        <input v-model="message">
         <!-- vueからDOM操作：プロパティ（src,class・・・）の置き換え -->
         <div v-bind:class="toilet">トイレの便器はここです。</div>
         <!-- ディレクティブ -->
@@ -34,6 +36,7 @@
                 </li>
             </transition-group>
             <button v-on:click="shanbulls">シャッフル</button>       
+        <gesui></gesui>
     </div>
 
     <!-- VUE -->
@@ -43,6 +46,16 @@
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
 
     <script>
+                
+        Vue.component('gesui' , {
+            template: `
+            <div class="uko">
+            <div class="uko">uko</div>
+            <slot></slot>
+            </div>
+            `
+        });
+
         const app = new Vue({ // const app = は省略可能
             el: "#app",
             data: {
@@ -68,8 +81,8 @@
                 shanbulls: function(){
                     this.shapes = _.shuffle(this.shapes);
                 },
-            }
-        })
+            },
+        });
     </script>
 </body>
 </html>
