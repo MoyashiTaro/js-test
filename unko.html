@@ -3,32 +3,33 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>うんこ</title>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<style>
-		.flip-list-move {
-			  transition: transform 1s;
-		}
-	</style>
 </head>
 <body>
 	<div id="app">
-		<gesui></gesui>
+		<ol>
+			<todos v-for="item in list" v-bind:todo="item" v-bind:key="item.id"></todos>
+		</ol>
 	</div>
-</body>
-<script>
-	Vue.component('gesui' , {
-		template: `
-		<div class="uko">
-			<div class="uko">uko</div>
-			<slot></slot>
-            </div>
-            `
-		});	
-	new Vue({
+
+	<script>
+		Vue.component('todos', {
+		props: ['todo'],
+		template: '<li>{{ todo.text }}</li>'
+		})
+
+		new Vue({
 		el: '#app',
-	});
-		
-</script>
+		data: {
+			list: [
+			{ id: 0, text: 'Vegetables' },
+			{ id: 1, text: 'Cheese' },
+			{ id: 2, text: 'Whatever else humans are supposed to eat' }
+			]
+		}
+		})
+	</script>
+</body>
 
 </html>

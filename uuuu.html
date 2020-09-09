@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>うんこ２米</title>
+</head>
+<body>
+    <div id="app">
+        <ol>
+            <todos v-for="item in list" v-bind:todo="item" v-bind:key="item.id"></todos>
+        </ol>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script>
+        Vue.component('todos', {
+            props: ['todo'],
+            template: `
+            <li>{{ todo.text }}</li>
+            `
+        })
+
+        new Vue({
+            el: "#app",
+            data: {
+                list:[
+                    { id:0, text:'unko1' },
+                    { id:0, text:'unko2' },
+                    { id:0, text:'unko3' },
+                    { id:0, text:'unko4' },
+                ]
+            }
+        })
+    </script>
+</body>
+</html>
